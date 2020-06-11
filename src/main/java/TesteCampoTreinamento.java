@@ -1,6 +1,4 @@
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
 import org.junit.Assert;
@@ -149,8 +147,43 @@ public class TesteCampoTreinamento {
 		driver.manage().window().maximize();
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		
+		WebElement botao = driver.findElement(By.id("buttonSimple"));
+		botao.click();
 		
+		Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+		driver.quit();
 		
 	}
+	
+	@Test
+	public void deveInteragirComLinks() {
+		System.setProperty("webdriver.chrome.driver", "D:/Automacao/Drivers/Chrome Drive/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		driver.findElement(By.linkText("Voltar")).click();
+		
+		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+		
+	}
+	
+	@Test
+	public void deveInteragirCom() {
+		System.setProperty("webdriver.chrome.driver", "D:/Automacao/Drivers/Chrome Drive/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		
+		//Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+		
+		Assert.assertEquals("Campo de Treinamento", driver.findElement(By.tagName("h3")).getText());
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", driver.findElement(By.className("facilAchar")).getText());
+		
+		
+		driver.quit();
+	}
+
 
 }
